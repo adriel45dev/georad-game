@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "Guest" ADD COLUMN     "profile" INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE "Room" ALTER COLUMN "initTime" DROP NOT NULL,
+ALTER COLUMN "time" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "profile" INTEGER NOT NULL DEFAULT 0;
