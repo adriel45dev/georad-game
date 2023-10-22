@@ -5,7 +5,7 @@ export default function Search() {
     <form className="min-w-full">
       <label
         htmlFor="search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+        className="mb-2 text-sm font-medium  sr-only text-white"
       >
         Search
       </label>

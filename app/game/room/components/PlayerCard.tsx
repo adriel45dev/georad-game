@@ -16,26 +16,33 @@ export default function PlayerCard({
   activeID,
 }: PlayerCardProps) {
   return (
-    <li className="min-w-max flex flex-row gap-2 items-center justify-between text-white ">
-      <div className="flex flex-row items-center gap-2 w-full flex-wrap">
+    <li className="w-full grid  grid-cols-3 gap-2 items-center  justify-center text-white bg-slate-700 flex-wrap p-1 rounded-lg px-1 ">
+      <div className=" w-full text-center col-span-2">
         <div
-          className={`hover:scale-125 w-10 h-10  rounded-full border-4 ${
+          className={`mx-auto flex-row hover:scale-125 w-12 h-12  rounded-full border-4 ${
             id == activeID ? "border-green-600" : "border-violet-600"
           }`}
         >
           <Image
-            src={"/assets/avatares/0.svg"}
+            src={`/assets/avatares/${profile}.svg`}
             width={400}
             height={400}
             alt="profile"
-            className="w-full "
+            className="w-full mx-auto"
           />
         </div>
-        <div>{username}</div>
+        <div className="w-full  p-2 flex justify-center items-center flex-wrap break-words ">
+          <abbr
+            className="no-underline	 break-words w-full text-center"
+            title={username}
+          >
+            {username.length > 12 ? `${username.slice(0, 12)}...` : username}
+          </abbr>
+        </div>
       </div>
-      <div className="text-xs flex flex-col md:flex-row  justify-center items-center flex-wrap">
-        <span>Pts.</span>
-        <span>{score}</span>
+
+      <div className="text-xs text-center ">
+        <span>Pts.</span> <span className="text-green-500">{score}</span>
       </div>
     </li>
   );

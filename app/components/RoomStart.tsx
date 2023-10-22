@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 // import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Alert from "./Alert";
 
 type RoomStartProps = {
   state: boolean;
@@ -24,6 +25,8 @@ export default function RoomStart({
 }: RoomStartProps) {
   const [room, setRoom] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertState, setAlertState] = useState(false);
 
   const router = useRouter();
 
@@ -54,7 +57,8 @@ export default function RoomStart({
       saveUser(guest);
       router.push(`/game/room/${room.id + 3000}`);
     } else {
-      alert("A sala informada não existe");
+      setAlertState(true);
+      setAlertMessage("A sala informada não existe.");
     }
 
     setLoading(false);
@@ -75,23 +79,36 @@ export default function RoomStart({
     const data = await response.json();
 
     if (response.ok) {
+      const { updateGuest } = data;
+      console.log(updateGuest);
+
+      saveUser(updateGuest);
       router.push(`/game/room/${room}`);
     } else {
-      alert("A sala informada não existe");
+      setAlertState(true);
+      setAlertMessage("A sala informada não existe.");
     }
 
     setLoading(false);
   };
 
   const handleUserData = () => {
-    if (+room < 3000) return alert("Código Inválido.");
+    if (!room) {
+      setAlertState(true);
+      setAlertMessage("Digite o código da sala.");
+      return;
+    }
+    if (+room < 3000) {
+      setAlertState(true);
+      setAlertMessage("Código Inválido.");
+      return;
+    }
 
     if (user.id != -1) return updateGuest();
 
-    if (!room) return alert("Digite o código da sala.");
-
     if (!user.username) {
-      alert("Parece que você esqueceu de escolher um username.");
+      setAlertState(true);
+      setAlertMessage("Parece que você esqueceu de escolher um username.");
       return setState(false);
     }
 
@@ -102,7 +119,13 @@ export default function RoomStart({
 
   const handleInputRoom = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setRoom(value.toUpperCase().replace(/\s+/g, "").trim());
+    setAlertState(false);
+    setRoom(
+      value
+        .replace(/\s+/g, "")
+        .replace(/[^0-9]/g, "")
+        .trim()
+    );
   };
   return (
     <div
@@ -110,7 +133,9 @@ export default function RoomStart({
         state ? "flex" : "hidden"
       } fixed flex-col justify-center items-center w-full h-screen backdrop-blur-sm bg-white/30 top-0 right-0 duration-150 z-50`}
     >
-      <div className="w-full flex justify-center items-center px-16">
+      <div className="w-full flex flex-col justify-center items-center px-16">
+        {alertState && <Alert text={alertMessage} />}
+
         <div className="w-full">
           <div className="relative  rounded-lg shadow bg-slate-900">
             <button
@@ -137,16 +162,25 @@ export default function RoomStart({
                 placeholder={"SALA"}
                 value={room}
                 onChange={handleInputRoom}
-                type="number"
+                type="text"
+                min={0}
+                inputMode="numeric"
               />
 
               <button
-                // href={`/game/room/${room}`}
                 disabled={isLoading}
                 onClick={handleUserData}
-                className="mt-4 inline-flex items-center justify-center p-4 mb-2  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-violet-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none  focus:ring-violet-800"
+                className={`${
+                  isLoading
+                    ? "bg-slate-800 border-green-500 border"
+                    : "bg-violet-600"
+                } mt-4 inline-flex items-center justify-center p-4 mb-2  overflow-hidden text-sm font-medium  rounded-lg group  hover:text-white text-white focus:ring-4 focus:outline-none  focus:ring-violet-800`}
               >
-                Conectar
+                {isLoading ? (
+                  <span className="animate-pulse">Conectando ...</span>
+                ) : (
+                  "Conectar"
+                )}
               </button>
             </div>
           </div>

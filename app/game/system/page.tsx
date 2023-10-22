@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonSection from "../components/ButtonSection";
 import Image from "next/image";
 import RoomStart from "@/app/components/RoomStart";
@@ -10,11 +10,14 @@ import SettingIcon from "@/public/assets/icons/SettingIcon";
 import RoomShare from "@/app/components/RoomShare";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
+import Avatars from "@/app/components/Avatars";
 
 export default function System() {
   const [state, setState] = useState(false);
   const [createRoomState, setCreateRoomState] = useState(false);
   const [shareRoomState, setShareRoomState] = useState(false);
+  const [avataresState, setAvatarsState] = useState(false);
+
   const [sala, setSala] = useState(3000);
   const [profile, setProfile] = useState(0);
   const [username, setUsername] = useState("");
@@ -23,6 +26,7 @@ export default function System() {
     username: "",
     profile: 0,
   });
+  const [hasUser, setHasUser] = useState(false);
   const router = useRouter();
 
   const verifyUser = () => {
@@ -30,6 +34,7 @@ export default function System() {
     if (dataJSON) {
       const data = JSON.parse(dataJSON);
       setUser(data);
+      setHasUser(true);
     } else {
       usernameGerator();
     }
@@ -58,22 +63,25 @@ export default function System() {
   // Verify if a user is logged in
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 md:px-24 py-4 bg-slate-900 min-w-full ">
-      <header className="flex flex-col min-w-full  justify-center items-centerm pt-8">
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-          GeoRAD{" "}
-          <span className="text-violet-600 dark:text-violet-500">Game</span> .
+    <main className="flex min-h-screen flex-col items-center p-8 md:px-44 py-4 bg-slate-900 min-w-full  gap-y-6">
+      <header className="max-w-max flex flex-row min-w-full  justify-center items-centerm  w-full mt-6">
+        <h1 className=" text-6xl font-extrabold leading-none tracking-tight  text-white text-center flex flex-wrap gap-2">
+          GeoRAD <span className="text-violet-500">Game</span>
         </h1>
       </header>
 
-      <section className="flex flex-col flex-1 md:flex-row gap-2 w-full h-full justify-center items-center">
+      <section className="flex flex-1 flex-col  md:flex-row gap-2 w-full h-full justify-center items-center p-4 rounded-lg bg-slate-850">
         {/* Guest */}
         <div className="flex flex-col md:flex-row gap-2 gap-y-6">
           {/* Profile */}
           <div className="flex justify-center items-center w-full relative">
-            <div className="flex p-2 border-4 border-violet-600 rounded-full w-max">
+            <div
+              className={`${
+                hasUser ? "border-green-600" : "border-violet-600"
+              } flex p-2 border-4  rounded-full w-max`}
+            >
               <Image
-                src="/assets/avatares/0.svg"
+                src={`/assets/avatares/${user.profile}.svg`}
                 alt="profile"
                 width={200}
                 height={200}
@@ -82,28 +90,37 @@ export default function System() {
             </div>
 
             {/* Edit Button */}
-            <div className="group w-12 h-12 bg-slate-900 rounded-full absolute border-gray-400 top-2 right-2 p-1">
-              <div className="group-hover:bg-violet-500 w-full h-full rounded-full bg-white flex justify-center items-center">
-                <EditIcon className="w-8 h-8 text-violet-600 group-hover:text-white" />
+            {!hasUser && (
+              <div
+                onClick={() => setAvatarsState(true)}
+                className="group w-12 h-12 bg-slate-900 rounded-full absolute border-gray-400 top-2 right-2 p-1"
+              >
+                <div className="group-hover:bg-violet-500 w-full h-full rounded-full bg-white flex justify-center items-center">
+                  <EditIcon className="w-8 h-8 text-violet-600 group-hover:text-white" />
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Nickname / Logout */}
           <div className="flex flex-col  justify-center items-start px-4 gap-2">
             <input
-              className="border-b-2 border-gray-600 transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0"
+              className={`${
+                hasUser ? "border-green-600" : "border-gray-600"
+              } border-b-2  transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0`}
               placeholder={"username"}
               onChange={handleInputUsername}
               value={user.username}
+              readOnly={hasUser}
             />
-
-            <button
-              className="text-normal text-violet-500"
-              onClick={removeUser}
-            >
-              {">"} Log out
-            </button>
+            {hasUser && (
+              <button
+                className="text-bold text-violet-500"
+                onClick={removeUser}
+              >
+                {">"} Sair
+              </button>
+            )}
           </div>
         </div>
 
@@ -139,14 +156,21 @@ export default function System() {
         setCreateRoomState={setCreateRoomState}
         sala={sala}
         setSala={setSala}
-        profile={profile}
-        username={username}
+        profile={user.profile as number}
+        username={user.username as string}
         setShareRoomState={setShareRoomState}
       />
       <RoomShare
         shareRoomState={shareRoomState}
         setShareRoomState={setShareRoomState}
         sala={sala}
+      />
+
+      <Avatars
+        setAvatarsState={setAvatarsState}
+        avataresState={avataresState}
+        user={user}
+        setUser={setUser}
       />
     </main>
   );

@@ -11,12 +11,10 @@ export default function Game() {
       <div className="grid grid-cols-1 md:grid-cols-5">
         <div className="z-10 col-span-3">
           <header className="flex flex-col min-w-full  justify-center items-centerm pt-8">
-            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-              GeoRAD{" "}
-              <span className="text-violet-600 dark:text-violet-500">Game</span>{" "}
-              .
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight  md:text-5xl lg:text-6xl text-white">
+              GeoRAD <span className=" text-violet-500">Game</span> .
             </h1>
-            <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+            <p className="text-lg font-normal  lg:text-xl text-gray-400">
               Com o GeoRAD você vai aprender geometria sem nem ver o tempo
               passar. Garanta suas habilidades craques em ângulos, polígonos,
               simetria e muito mais. Seja o campeão em geometria com o GeoRAD!

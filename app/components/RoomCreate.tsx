@@ -3,14 +3,15 @@ import CloseIcon from "@/public/assets/icons/CloseIcon";
 import { Guest } from "../shared/types/guest.type";
 import { Room } from "../shared/types/room.type";
 import { useState } from "react";
+import Alert from "./Alert";
 
 type RoomStartProps = {
   createRoomState: boolean;
   setCreateRoomState: React.Dispatch<React.SetStateAction<boolean>>;
   sala: number;
   setSala: React.Dispatch<React.SetStateAction<number>>;
-  username?: string;
-  profile?: number;
+  username: string;
+  profile: number;
   setShareRoomState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -18,6 +19,8 @@ export default function RoomCreate({
   createRoomState,
   setCreateRoomState,
   sala,
+  username,
+  profile,
   setSala,
   setShareRoomState,
 }: RoomStartProps) {
@@ -25,6 +28,8 @@ export default function RoomCreate({
 
   const [time, setTime] = useState("");
   const [loading, setLoading] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertState, setAlertState] = useState(false);
 
   const handleInputTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -32,17 +37,22 @@ export default function RoomCreate({
     setTime(value.replace(/[^0-9]/g, ""));
   };
 
+  const saveUser = (guest: { [key: string]: string | number }) => {
+    const dataJSON = JSON.stringify(guest);
+    localStorage.setItem("user", dataJSON);
+  };
+
   // e: React.FormEvent<HTMLFormElement>
   const createRoom = async () => {
     setLoading(true);
 
     const guest: Guest = {
-      username: "test",
-      profile: 0,
+      username: username,
+      profile: profile,
     };
 
     const room: Room = {
-      time: +time * 1000,
+      time: +time * 60000,
     };
 
     const response = await fetch("/api/postRoom", {
@@ -58,11 +68,17 @@ export default function RoomCreate({
     if (response.ok) {
       const { guest, room } = data;
       setSala(room.id);
+      saveUser(guest);
       setCreateRoomState(false);
       setShareRoomState(true);
     }
 
     setLoading(false);
+  };
+
+  const handleCreateRoom = () => {
+    if (+time <= 0) return alert("Determine o tempo mínimo da partida.");
+    createRoom();
   };
 
   return (
@@ -71,7 +87,8 @@ export default function RoomCreate({
         createRoomState ? "flex" : "hidden"
       } fixed flex-col justify-center items-center w-full h-screen backdrop-blur-sm bg-white/30 top-0 right-0 duration-150 z-50`}
     >
-      <div className="min-w-full flex justify-center items-center px-16">
+      <div className="min-w-full flex flex-col justify-center items-center px-16">
+        {true && <Alert text={alertMessage} />}
         <div className="w-full">
           <div className="relative  rounded-lg shadow bg-slate-900">
             <button
@@ -111,10 +128,18 @@ export default function RoomCreate({
 
               <button
                 disabled={loading}
-                onClick={createRoom}
-                className="mt-4 inline-flex items-center justify-center p-4 mb-2  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-violet-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none  focus:ring-violet-800"
+                onClick={handleCreateRoom}
+                className={`${
+                  loading
+                    ? "bg-slate-800 border-green-500 border"
+                    : "bg-violet-600"
+                } mt-4 inline-flex items-center justify-center p-4 mb-2  overflow-hidden text-sm font-medium  rounded-lg group  hover:text-white text-white focus:ring-4 focus:outline-none  focus:ring-violet-800`}
               >
-                Criar
+                {loading ? (
+                  <span className="animate-pulse">Criando ...</span>
+                ) : (
+                  "Criar"
+                )}
               </button>
             </div>
           </div>

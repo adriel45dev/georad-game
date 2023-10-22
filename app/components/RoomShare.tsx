@@ -69,7 +69,7 @@ export default function RoomShare({
 
                 <Link
                   href={`/game/room/${sala + 3000}`}
-                  className="w-full flex items-center justify-center p-4 text-sm font-medium text-gray-900 rounded-lg group bg-violet-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none  focus:ring-violet-800"
+                  className="w-full flex items-center justify-center p-4 text-sm font-medium  rounded-lg group bg-violet-600 hover:text-white text-white focus:ring-4 focus:outline-none  focus:ring-violet-800"
                 >
                   Entrar
                 </Link>

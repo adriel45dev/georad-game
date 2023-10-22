@@ -26,6 +26,7 @@ export default async function handler(
         profile: user.profile,
         score: user.score,
         roomId: room.id,
+        role: ROLE.PLAYER,
       },
     });
 
