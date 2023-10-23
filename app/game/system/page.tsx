@@ -106,8 +106,8 @@ export default function System() {
           <div className="flex flex-col  justify-center items-start px-4 gap-2">
             <input
               className={`${
-                hasUser ? "border-green-600" : "border-gray-600"
-              } border-b-2  transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0`}
+                hasUser ? "border-b-green-600" : "border-b-gray-600"
+              }  appearance-none border-transparent border-b-2  transition duration-500 ease-in-out focus:border-b-violet-600 focus:border-t-none focus:border-transparent bg-transparent text-white focus:outline-none focus:ring-0`}
               placeholder={"username"}
               onChange={handleInputUsername}
               value={user.username}

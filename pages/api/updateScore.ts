@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient, ROLE } from "@prisma/client";
-import { Room } from "@/app/shared/types/room.type";
+import { Guest } from "@/app/shared/types/guest.type";
 
 const prisma = new PrismaClient();
 export default async function handler(
@@ -10,23 +10,24 @@ export default async function handler(
   if (req.method === "POST") {
     const Pusher = require("pusher");
 
-    const { dataRoom }: { dataRoom: Room } = req.body;
+    const { dataUser }: { dataUser: Guest } = req.body;
 
-    const room = await prisma.room.update({
+    const guest = await prisma.guest.update({
       where: {
-        id: dataRoom.id,
+        id: dataUser.id,
       },
       data: {
-        initTime: dataRoom.initTime,
-        started: dataRoom.started,
+        score: dataUser.score,
       },
     });
 
-    // const guests = await prisma.guest.findMany({
-    //   where: {
-    //     roomId: dataRoom.id,
-    //   },
-    // });
+    const guests = await prisma.guest.findMany({
+      where: {
+        roomId: dataUser.roomId,
+      },
+    });
+
+    const dbRoomID = dataUser.roomId;
 
     // Pusher
     const pusher = new Pusher({
@@ -37,10 +38,10 @@ export default async function handler(
       useTLS: true,
     });
 
-    pusher.trigger("room-start", "room-start-event", {
-      message: `${JSON.stringify({ room })}\n\n`,
+    pusher.trigger("score", "score-event", {
+      message: `${JSON.stringify({ guests, guest, dbRoomID })}\n\n`,
     });
 
-    res.status(200).json({ room });
+    res.status(200).json({ guests, guest });
   }
 }

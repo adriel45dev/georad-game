@@ -24,7 +24,7 @@ export default async function handler(
 
     const guest = await prisma.guest.create({
       data: {
-        username: guestData.username,
+        username: guestData.username as string,
         role: ROLE.MANEGER,
         score: 0,
         profile: guestData.profile,

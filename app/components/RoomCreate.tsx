@@ -33,6 +33,7 @@ export default function RoomCreate({
 
   const handleInputTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    setAlertState(false);
     if (+value < 0) return setTime("0");
     setTime(value.replace(/[^0-9]/g, ""));
   };
@@ -77,7 +78,12 @@ export default function RoomCreate({
   };
 
   const handleCreateRoom = () => {
-    if (+time <= 0) return alert("Determine o tempo mínimo da partida.");
+    if (+time <= 0) {
+      setAlertMessage("Determine o tempo mínimo da partida.");
+      setAlertState(true);
+      return;
+    }
+
     createRoom();
   };
 
@@ -88,7 +94,7 @@ export default function RoomCreate({
       } fixed flex-col justify-center items-center w-full h-screen backdrop-blur-sm bg-white/30 top-0 right-0 duration-150 z-50`}
     >
       <div className="min-w-full flex flex-col justify-center items-center px-16">
-        {true && <Alert text={alertMessage} />}
+        {alertState && <Alert text={alertMessage} />}
         <div className="w-full">
           <div className="relative  rounded-lg shadow bg-slate-900">
             <button
@@ -113,7 +119,7 @@ export default function RoomCreate({
                 <input
                   id="time"
                   name="time"
-                  className="w-full border-b-2 border-gray-600 transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0 text-4xl"
+                  className="w-full border-b-2 border-b-gray-600 border-transparent transition duration-500 ease-in-out focus:border-b-violet-600 focus:border-transparent bg-transparent text-white focus:outline-none focus:ring-0 text-4xl"
                   placeholder={"0"}
                   value={time}
                   onChange={handleInputTime}

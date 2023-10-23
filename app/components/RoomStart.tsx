@@ -80,7 +80,6 @@ export default function RoomStart({
 
     if (response.ok) {
       const { updateGuest } = data;
-      console.log(updateGuest);
 
       saveUser(updateGuest);
       router.push(`/game/room/${room}`);
@@ -158,7 +157,7 @@ export default function RoomStart({
               </p>
 
               <input
-                className="border-b-2 border-gray-600 transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0 text-4xl"
+                className="border-b-2 border-b-gray-600 border-transparent transition duration-500 ease-in-out focus:border-b-violet-600 bg-transparent text-white focus:outline-none focus:border-transparent focus:ring-0 text-4xl"
                 placeholder={"SALA"}
                 value={room}
                 onChange={handleInputRoom}

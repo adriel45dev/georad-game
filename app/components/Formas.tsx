@@ -42,8 +42,6 @@ export default function Formas() {
     mesh.scale.x = 2;
     mesh.scale.y = 2;
     mesh.scale.z = 2;
-
-    console.log(mesh);
   }, [mesh]);
 
   const formas = {

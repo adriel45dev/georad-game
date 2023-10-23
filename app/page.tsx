@@ -1,6 +1,6 @@
 import Card from "./components/Card";
 import Search from "./components/Search";
-import FORMAS from "./shared/data";
+import { FORMAS } from "./shared/data";
 
 export default function Home() {
   return (

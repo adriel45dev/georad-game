@@ -21,7 +21,7 @@ export default async function handler(
     // Salva no banco com Prisma
     const guest = await prisma.guest.create({
       data: {
-        username: user.username,
+        username: user.username as string,
         role: ROLE.PLAYER,
         score: 0,
         profile: user.profile,

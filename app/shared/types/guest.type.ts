@@ -1,6 +1,7 @@
 export type Guest = {
-  username: string;
-  profile: number;
+  username?: string;
+  profile?: number;
   id?: number;
   score?: number;
+  roomId?: number;
 };

@@ -9,6 +9,10 @@ import Pusher from "pusher-js";
 import Loading from "@/app/components/Loading";
 import Link from "next/link";
 import { Room } from "@/app/shared/types/room.type";
+import { log } from "console";
+import { Guest } from "@/app/shared/types/guest.type";
+import Questions from "../components/Questions";
+import Timer from "../components/Timer";
 
 type PageProps = {
   params: {
@@ -32,7 +36,7 @@ export default function Room({ params: { slug } }: PageProps) {
     }[]
   >();
   const [currentRoom, setCurrentRoom] = useState<{
-    [key: string]: string | number;
+    [key: string]: string | number | boolean;
   }>();
   const [fetched, setFetched] = useState(false);
 
@@ -124,6 +128,26 @@ export default function Room({ params: { slug } }: PageProps) {
     return () => clearTimeout(interval);
   }, []);
 
+  // SCORE CHANGE -- EVENT TRIGGER {SCORE} PUSHER
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      let pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
+        cluster: "sa1",
+      });
+
+      let channel = pusher.subscribe("score");
+
+      channel.bind("score-event", function (data: any) {
+        const dataUser = JSON.parse(data.message);
+        const { guests, dbRoomID } = dataUser;
+
+        if (dbRoomID != roomID) return;
+        setPlayers(guests);
+      });
+    }, 100);
+    return () => clearTimeout(interval);
+  }, []);
+
   useEffect(() => {
     const interval = setTimeout(() => {
       if (+slug < 3000) return router.push("/game");
@@ -132,6 +156,21 @@ export default function Room({ params: { slug } }: PageProps) {
 
     return () => clearTimeout(interval);
   }, []);
+
+  useEffect(() => {
+    if (!activeUser) return;
+
+    const interval = setTimeout(() => {
+      const [active] =
+        players?.filter((player) => player.id == activeUser.id) || [];
+
+      if (!active) return;
+
+      setActiveUser(active);
+    }, 1000);
+
+    return () => clearTimeout(interval);
+  }, [players]);
 
   // useEffect(() => {
   //   if (!activeUser) return;
@@ -168,6 +207,38 @@ export default function Room({ params: { slug } }: PageProps) {
       );
     }
   };
+
+  const updateScore = async () => {
+    const dataUser: Guest = {
+      id: activeUser?.id as number,
+      score: Number(activeUser?.score) + score,
+      roomId: roomID,
+    };
+
+    const response = await fetch("/api/updateScore", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ dataUser }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      const { guests, guest } = data;
+      setPlayers(guests);
+      setActiveUser(guest);
+      setScore(0);
+      // saveUser(guest);
+    } else {
+      // falhou
+      alert(
+        "Algo saiu errado no nosso servidor! Se o problema continuar volte mais tarde 👍"
+      );
+    }
+  };
+
   const handleStarPlay = () => {
     // update room -- and trigger real time
     setStartingGame(true);
@@ -203,12 +274,21 @@ export default function Room({ params: { slug } }: PageProps) {
     return () => clearInterval(interval);
   }, [currentRoom?.started, currentRoom]);
 
+  const [score, setScore] = useState<number>(0);
+
+  // handle score
+  const handleScore = () => {
+    setScore((prevScore) => prevScore + 1);
+  };
+
   useEffect(() => {
     const intervval = setTimeout(() => {
-      console.log(activeUser?.score);
-
-      if (!timerStarted && Number(activeUser?.score) > 0) {
-        alert("A partida terminou -- atualizar o score dos jogadores");
+      if (!timerStarted) {
+        setCurrentRoom((prevRoom) => ({ ...prevRoom, started: false }));
+      }
+      if (!timerStarted && score > 0) {
+        // alert("A partida terminou -- atualizar o score dos jogadores");
+        updateScore();
       }
     }, 1000);
     return () => clearTimeout(intervval);
@@ -267,22 +347,19 @@ export default function Room({ params: { slug } }: PageProps) {
           </span>
 
           {/* PERGUNTA */}
-          <div className="hyphens-auto flex flex-row justify-center w-full text-violet-400 flex-1 mt-8 p-2">
-            <span className="text-bold text-2xl text-center max-w-max break-words">
-              Qual a foma geometrica tem 3 lados iguais?
-            </span>
-          </div>
+          <Questions
+            score={score}
+            setScore={setScore}
+            started={Boolean(currentRoom?.started)}
+          />
 
           {/* TIMER */}
-          <div className="absolute text-gray-400 text-lg top-2 right-4">
-            {currentRoom?.started ? (
-              <span>{`${minutes.toString().padStart(2, "0")}:${seconds
-                .toString()
-                .padStart(2, "0")}`}</span>
-            ) : (
-              <span>{Number(currentRoom?.time) / 60000}:00</span>
-            )}{" "}
-          </div>
+          <Timer
+            started={Boolean(currentRoom?.started)}
+            time={Number(currentRoom?.time)}
+            minutes={minutes}
+            seconds={seconds}
+          />
         </div>
 
         <MenuIcon
