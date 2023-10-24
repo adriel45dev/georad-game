@@ -16,8 +16,18 @@ export default function Questions({
   const [questions, setQuestions] = useState(QUESTIONS);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [hasEnded, setHasEnded] = useState(false);
+  const [options, setOptions] = useState<string[]>([]);
 
   const [selectedOption, setSelectedOption] = useState(0);
+
+  // SORT OPTIONS
+  useEffect(() => {
+    const prev = [...Object.keys(questions[questionIndex].options)];
+    prev.sort(() => Math.random() - 0.5);
+    console.log(prev);
+
+    setOptions(prev);
+  }, [questionIndex]);
 
   useEffect(() => {
     if (started) {
@@ -29,10 +39,7 @@ export default function Questions({
   const handleNextQuestion = () => {
     setSelectedOption(0);
 
-    const selectedAnswer = Object.keys(questions[questionIndex].options)[
-      selectedOption
-    ];
-    if (selectedAnswer == "answer") {
+    if (options[selectedOption] == "answer") {
       setScore((prevScore) => prevScore + 1);
       console.log(score);
     }
@@ -44,11 +51,11 @@ export default function Questions({
     !hasEnded ? (
       <div className="gap-4 hyphens-auto flex flex-col justify-start items-center w-full text-violet-400 flex-1 mt-8 p-2">
         <span className="text-bold text-lg text-center max-w-max break-words">
-          {QUESTIONS[questionIndex].question}
+          {questions[questionIndex].question}
         </span>
 
         <div className="flex flex-col gap-2 w-full px-4">
-          {Object.keys(questions[questionIndex].options).map((key, i) => {
+          {options.map((key, i) => {
             const option = questions[questionIndex].options[key];
             return (
               <div
@@ -73,11 +80,6 @@ export default function Questions({
               </div>
             );
           })}
-        </div>
-
-        <div>{selectedOption}</div>
-        <div>
-          {Object.keys(questions[questionIndex].options)[selectedOption]}
         </div>
 
         <div className="w-full flex justify-center items-center">
