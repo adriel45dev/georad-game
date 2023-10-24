@@ -172,20 +172,12 @@ export default function Room({ params: { slug } }: PageProps) {
     return () => clearTimeout(interval);
   }, [players]);
 
-  // useEffect(() => {
-  //   if (!activeUser) return;
-  //   console.log(activeUser);
-  // }, [activeUser]);
-
   const updateRoom = async () => {
     const dataRoom: Room = {
       id: roomID,
       started: true,
       initTime: String(Date.now()),
     };
-
-    console.log("> updateRoom");
-    console.log(dataRoom);
 
     const response = await fetch(`/api/updateRoom`, {
       method: "POST",
@@ -194,9 +186,6 @@ export default function Room({ params: { slug } }: PageProps) {
       },
       body: JSON.stringify({ dataRoom }),
     });
-
-    console.log("> updateRoom [response]");
-    console.log(response);
 
     const data = await response.json();
 

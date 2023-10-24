@@ -50,9 +50,6 @@ export default function RoomStart({
       body: JSON.stringify({ user, roomID }),
     });
 
-    console.log("> RoomStart > [response]");
-    console.log(response);
-
     const data = await response.json();
 
     if (response.ok) {

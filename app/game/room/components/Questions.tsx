@@ -20,15 +20,15 @@ export default function Questions({
 
   const [selectedOption, setSelectedOption] = useState(0);
 
-  // SORT OPTIONS
+  /*SORT OPTIONS*/
   useEffect(() => {
     const prev = [...Object.keys(questions[questionIndex].options)];
     prev.sort(() => Math.random() - 0.5);
-    console.log(prev);
 
     setOptions(prev);
   }, [questionIndex]);
 
+  /* RESET PLAYER VIEW */
   useEffect(() => {
     if (started) {
       setQuestionIndex(0);
@@ -41,7 +41,6 @@ export default function Questions({
 
     if (options[selectedOption] == "answer") {
       setScore((prevScore) => prevScore + 1);
-      console.log(score);
     }
     if (questionIndex + 1 > questions.length - 1) return setHasEnded(true);
     setQuestionIndex((i) => i + 1);

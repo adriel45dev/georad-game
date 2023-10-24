@@ -9,9 +9,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Guest[] | { error: string }>
 ) {
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
-  console.log(process.env.NEXT_PUBLIC_PUSHER_KEY);
-
   try {
     const guests = await prisma.guest.findMany();
 
