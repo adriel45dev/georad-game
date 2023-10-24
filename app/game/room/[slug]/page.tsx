@@ -335,6 +335,7 @@ export default function Room({ params: { slug } }: PageProps) {
                 profile={Number(player.profile)}
                 score={Number(player.score)}
                 activeID={Number(activeUser?.id)}
+                role={String(player.role)}
               />
             ))}
           </ul>

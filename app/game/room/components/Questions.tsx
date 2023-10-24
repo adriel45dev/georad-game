@@ -40,7 +40,7 @@ export default function Questions({
     setQuestionIndex((i) => i + 1);
   };
 
-  return true ? (
+  return started ? (
     !hasEnded ? (
       <div className="gap-4 hyphens-auto flex flex-col justify-start items-center w-full text-violet-400 flex-1 mt-8 p-2">
         <span className="text-bold text-lg text-center max-w-max break-words">
@@ -57,6 +57,7 @@ export default function Questions({
               >
                 <input
                   onClick={() => setSelectedOption(i)}
+                  onChange={() => {}}
                   checked={i == selectedOption}
                   id="option"
                   type="radio"

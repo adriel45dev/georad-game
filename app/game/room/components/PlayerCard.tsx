@@ -1,3 +1,4 @@
+import GameIcon from "@/public/assets/icons/GameIcon";
 import Image from "next/image";
 import React from "react";
 
@@ -7,6 +8,7 @@ type PlayerCardProps = {
   profile: number;
   score: number;
   activeID: number;
+  role: string;
 };
 export default function PlayerCard({
   id,
@@ -14,14 +16,19 @@ export default function PlayerCard({
   profile,
   score,
   activeID,
+  role,
 }: PlayerCardProps) {
   return (
-    <li className="w-full grid  grid-cols-3 gap-2 items-center  justify-center text-white bg-slate-700 flex-wrap p-1 rounded-lg px-1 ">
-      <div className=" w-full text-center col-span-2">
+    <li className="relative w-full grid  grid-cols-3 gap-2 items-center justify-center text-white bg-slate-700 flex-wrap p-1 rounded-lg px-1 ">
+      <div className=" w-full text-center col-span-2 ">
         <div
           className={`mx-auto flex-row hover:scale-125 w-12 h-12  rounded-full border-4 ${
-            id == activeID ? "border-green-600" : "border-violet-600"
-          }`}
+            role == "MANEGER"
+              ? "border-teal-500"
+              : id == activeID
+              ? "border-green-600"
+              : "border-violet-600"
+          } `}
         >
           <Image
             src={`/assets/avatares/${profile}.svg`}
@@ -40,6 +47,12 @@ export default function PlayerCard({
           </abbr>
         </div>
       </div>
+
+      {role == "MANEGER" ? (
+        <GameIcon className="text-teal-300 w-5 h-5 absolute top-1 right-1" />
+      ) : (
+        ""
+      )}
 
       <div className="text-xs text-center ">
         <span>Pts.</span> <span className="text-green-500">{score}</span>
