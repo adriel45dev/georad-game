@@ -7,6 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  "use server";
   const { id } = req.query;
   const Pusher = require("pusher");
 
@@ -32,13 +33,25 @@ export default async function handler(
         }
 
         // Pusher
+        // const pusher = new Pusher({
+        //   appId: process.env.PUSHER_APP_ID,
+        //   key: process.env.NEXT_PUBLIC_PUSHER_KEY,
+        //   secret: process.env.PUSHER_SECRET,
+        //   cluster: "sa1",
+        //   useTLS: true,
+        // });
+
         const pusher = new Pusher({
-          appId: process.env.PUSHER_APP_ID,
-          key: process.env.NEXT_PUBLIC_PUSHER_KEY,
-          secret: process.env.PUSHER_SECRET,
+          appId: 1692054,
+          key: "e9fb7aac1c7042b7aa8d",
+          secret: "385b4fddc2fddb1d407b",
           cluster: "sa1",
           useTLS: true,
         });
+
+        // PUSHER_APP_ID=1692054
+        // PUSHER_SECRET=385b4fddc2fddb1d407b
+        // NEXT_PUBLIC_PUSHER_KEY=e9fb7aac1c7042b7aa8d
 
         pusher.trigger("room", "room-event", {
           message: `${JSON.stringify({ guests, room, idNum })}\n\n`,
