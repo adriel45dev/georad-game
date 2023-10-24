@@ -51,9 +51,7 @@ export default function Room({ params: { slug } }: PageProps) {
 
     const roomID = +slug - 3000;
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/getUsers?id=${roomID}`
-    );
+    const response = await fetch(`/api/getUsers?id=${roomID}`);
 
     const data = await response.json();
 
@@ -188,16 +186,13 @@ export default function Room({ params: { slug } }: PageProps) {
 
     // console.log(dataRoom);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/updateRoom`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ dataRoom }),
-      }
-    );
+    const response = await fetch(`api/updateRoom`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ dataRoom }),
+    });
 
     const data = await response.json();
 
@@ -220,16 +215,13 @@ export default function Room({ params: { slug } }: PageProps) {
       roomId: roomID,
     };
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/updateScore`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ dataUser }),
-      }
-    );
+    const response = await fetch(`/api/updateScore`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ dataUser }),
+    });
 
     const data = await response.json();
 
