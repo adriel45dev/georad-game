@@ -42,13 +42,16 @@ export default function RoomStart({
     setLoading(true);
     const roomID = +room - 3000;
 
-    const response = await fetch("/api/postGuest", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user, roomID }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/postGuest`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user, roomID }),
+      }
+    );
 
     const data = await response.json();
 
@@ -68,13 +71,16 @@ export default function RoomStart({
     setLoading(true);
     const roomID = +room - 3000;
 
-    const response = await fetch("/api/updateGuest", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user, roomID }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/updateGuest`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user, roomID }),
+      }
+    );
 
     const data = await response.json();
 

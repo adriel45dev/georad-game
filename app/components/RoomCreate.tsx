@@ -56,13 +56,16 @@ export default function RoomCreate({
       time: +time * 60000,
     };
 
-    const response = await fetch("/api/postRoom", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ guest, room }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/postRoom`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ guest, room }),
+      }
+    );
 
     const data = await response.json();
 
