@@ -42,6 +42,9 @@ export default function RoomStart({
     setLoading(true);
     const roomID = +room - 3000;
 
+    console.log("> RoomStart");
+    console.log({ user, roomID });
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/postGuest`,
       {
@@ -52,6 +55,9 @@ export default function RoomStart({
         body: JSON.stringify({ user, roomID }),
       }
     );
+
+    console.log("> RoomStart > [response]");
+    console.log(response);
 
     const data = await response.json();
 
