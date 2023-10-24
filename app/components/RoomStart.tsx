@@ -44,6 +44,7 @@ export default function RoomStart({
 
     console.log("> RoomStart");
     console.log({ user, roomID });
+    console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/api/postGuest`);
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/postGuest`,
