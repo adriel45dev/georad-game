@@ -53,7 +53,7 @@ export default function Avatars({
             <div className="p-6 flex gap-2 flex-col">
               <div className="w-full gap-2 flex flex-col">
                 <p className="text-xs font-normal text-gray-400">
-                  Qual será o tempo da partida. / tempo em minutos
+                  Selecione um avatar pra seu perfil.
                 </p>
 
                 <ul className="min-w-full min-h-full flex justify-center md:justify-start flex-wrap gap-2 select-none  items-center">
