@@ -21,7 +21,7 @@ GeoRAD permite que alunos aprendam sobre formas geométricas de maneira interati
 
 O projeto inclui:
 
-- Uma interface interativa para interagir com as formas
+- Uma interface interativa com as formas
 - Um jogo interativo no formato de Quiz
 - Informações sobre cada forma geométrica
 - Exercícios e atividades
@@ -32,7 +32,7 @@ O projeto inclui:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/usuario/georad
+git clone https://github.com/adriel45dev/georad-app
 
 # Instale as dependências
 npm install
@@ -53,4 +53,4 @@ Este projeto está licenciado sob a Licença MIT - consulte o arquivo LICENSE pa
 ## Contato
 
 Eduardo Silva - @
-Projeto Link: https://github.com/usuario/georad
+Projeto Link: https://github.com/adriel45dev/georad-app
