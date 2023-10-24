@@ -2,12 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient, ROLE } from "@prisma/client";
 import { Room } from "@/app/shared/types/room.type";
 
+const prisma = new PrismaClient();
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const prisma = new PrismaClient();
-
   if (req.method === "POST") {
     const Pusher = require("pusher");
 

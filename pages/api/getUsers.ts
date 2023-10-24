@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient, ROLE } from "@prisma/client";
 
+const prisma = new PrismaClient();
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   "use server";
-  const prisma = new PrismaClient();
 
   const { id } = req.query;
   const Pusher = require("pusher");

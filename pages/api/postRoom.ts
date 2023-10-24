@@ -4,12 +4,11 @@ import { PrismaClient, ROLE } from "@prisma/client";
 import { Guest } from "@/app/shared/types/guest.type";
 import { Room } from "@/app/shared/types/room.type";
 
+const prisma = new PrismaClient();
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const prisma = new PrismaClient();
-
   if (req.method === "POST") {
     const { guest: guestData, room: roomData }: { guest: Guest; room: Room } =
       req.body;
