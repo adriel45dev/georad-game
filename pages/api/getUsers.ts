@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient, ROLE } from "@prisma/client";
-// import Pusher from "pusher";
 
 const prisma = new PrismaClient();
 
@@ -33,7 +32,6 @@ export default async function handler(
           return res.status(404).json({ error: "User not found" });
         }
 
-        Pusher;
         const pusher = new Pusher({
           appId: process.env.PUSHER_APP_ID,
           key: process.env.NEXT_PUBLIC_PUSHER_KEY,
