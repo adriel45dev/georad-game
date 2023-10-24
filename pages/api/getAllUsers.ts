@@ -5,11 +5,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  "use server";
-
   const prisma = new PrismaClient();
 
-  const guests = await prisma.guest.findMany();
+  try {
+    const guests = await prisma.guest.findMany();
 
-  return res.status(200).json({ guests });
+    // resto do código
+
+    res.status(200).json(guests);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error fetching guests" });
+  } finally {
+    await prisma.$disconnect();
+  }
 }
