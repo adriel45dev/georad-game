@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GeoRAD
 
-## Getting Started
+<p align="center">
+  <img src="/public/assets/logo.svg" alt="GeoRAD" width="200px" height="200px">
+</p>
 
-First, run the development server:
+GeoRAD é um projeto sobre formas geométricas para um projeto escolar idealizado pelo estudante Eduardo Silva.
+
+## Tecnologias Utilizadas
+
+- Next.js 13
+- TypeScript
+- TailwindCSS
+- Prisma.js
+- Pusher.js
+- Node.js
+
+## Sobre o Projeto
+
+GeoRAD permite que alunos aprendam sobre formas geométricas de maneira interativa. Os alunos podem visualizar e interagir com formas geométricas em uma área de trabalho e aprender sobre seus atributos e propriedades.
+
+O projeto inclui:
+
+- Uma interface interativa para interagir com as formas
+- Um jogo interativo no formato de Quiz
+- Informações sobre cada forma geométrica
+- Exercícios e atividades
+- Integração com API do Pusher para compartilhamento em tempo real
+- Backend com Prisma ORM e banco de dados PostgreSQL
+
+## Instalação
 
 ```bash
+# Clone o repositório
+git clone https://github.com/usuario/georad
+
+# Instale as dependências
+npm install
+
+# Execute
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contribuindo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Pull requests são bem-vindos! Sinta-se à vontade para contribuir com este projeto.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Licença
 
-## Learn More
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo LICENSE para obter detalhes.
 
-To learn more about Next.js, take a look at the following resources:
+## Contato
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Eduardo Silva - @
+Projeto Link: https://github.com/usuario/georad
