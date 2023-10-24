@@ -9,9 +9,7 @@ export default async function handler(
 ) {
   "use server";
 
-  if (req.method === "GET") {
-    const guests = await prisma.guest.findMany();
+  const guests = await prisma.guest.findMany();
 
-    return res.status(200).json({ guests });
-  }
+  return res.status(200).json({ guests });
 }
