@@ -16,7 +16,10 @@ export default async function handler(
       },
     });
 
-    if (!room) return res.status(404).json({ error: "Sala não existe" });
+    if (!room) {
+      res.status(404).json({ error: "Sala não existe" });
+      return;
+    }
 
     // Salva no banco com Prisma
     const guest = await prisma.guest.create({

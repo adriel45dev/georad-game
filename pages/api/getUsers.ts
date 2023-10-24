@@ -14,14 +14,6 @@ export default async function handler(
     try {
       const idNum = Number(id);
 
-      // id Int @id @default(autoincrement())
-      // username String
-      // role ROLE
-      // score Int @default(0)
-      // profile Int @default(0)
-      // room Room @relation(fields: [roomId], references: [id])
-      // roomId Int
-
       if (!isNaN(idNum)) {
         const room = await prisma.room.findUnique({
           where: {
