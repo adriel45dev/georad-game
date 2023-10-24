@@ -184,15 +184,19 @@ export default function Room({ params: { slug } }: PageProps) {
       initTime: String(Date.now()),
     };
 
-    // console.log(dataRoom);
+    console.log("> updateRoom");
+    console.log(dataRoom);
 
-    const response = await fetch(`api/updateRoom`, {
+    const response = await fetch(`/api/updateRoom`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ dataRoom }),
     });
+
+    console.log("> updateRoom [response]");
+    console.log(response);
 
     const data = await response.json();
 
