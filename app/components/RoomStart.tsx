@@ -46,16 +46,13 @@ export default function RoomStart({
     console.log({ user, roomID });
     console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/api/postGuest`);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/postGuest`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user, roomID }),
-      }
-    );
+    const response = await fetch(`/api/postGuest`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user, roomID }),
+    });
 
     console.log("> RoomStart > [response]");
     console.log(response);
