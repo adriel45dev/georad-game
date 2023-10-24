@@ -1,6 +1,6 @@
 "use client";
 import { QUESTIONS } from "@/app/shared/data";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type QuestionsProps = {
   score: number;
@@ -19,6 +19,13 @@ export default function Questions({
 
   const [selectedOption, setSelectedOption] = useState(0);
 
+  useEffect(() => {
+    if (started) {
+      setQuestionIndex(0);
+      setScore(0);
+    }
+  }, [started]);
+
   const handleNextQuestion = () => {
     setSelectedOption(0);
 
@@ -27,12 +34,13 @@ export default function Questions({
     ];
     if (selectedAnswer == "answer") {
       setScore((prevScore) => prevScore + 1);
+      console.log(score);
     }
     if (questionIndex + 1 > questions.length - 1) return setHasEnded(true);
     setQuestionIndex((i) => i + 1);
   };
 
-  return started ? (
+  return true ? (
     !hasEnded ? (
       <div className="gap-4 hyphens-auto flex flex-col justify-start items-center w-full text-violet-400 flex-1 mt-8 p-2">
         <span className="text-bold text-lg text-center max-w-max break-words">
@@ -48,7 +56,7 @@ export default function Questions({
                 className="flex flex-row w-full items-center  bg-slate-700 p-2 rounded-2xl flex-wrap"
               >
                 <input
-                  onChange={() => setSelectedOption(i)}
+                  onClick={() => setSelectedOption(i)}
                   checked={i == selectedOption}
                   id="option"
                   type="radio"

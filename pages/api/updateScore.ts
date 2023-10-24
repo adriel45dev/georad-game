@@ -22,6 +22,11 @@ export default async function handler(
     });
 
     const guests = await prisma.guest.findMany({
+      orderBy: [
+        {
+          score: "desc",
+        },
+      ],
       where: {
         roomId: dataUser.roomId,
       },
