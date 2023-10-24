@@ -181,7 +181,7 @@ export default function Room({ params: { slug } }: PageProps) {
     const dataRoom: Room = {
       id: roomID,
       started: true,
-      initTime: Date.now(),
+      initTime: String(Date.now()),
     };
 
     // console.log(dataRoom);

@@ -17,7 +17,7 @@ export default async function handler(
     const room = await prisma.room.create({
       data: {
         started: false,
-        initTime: 0,
+        initTime: "0",
         time: roomData.time,
       },
     });

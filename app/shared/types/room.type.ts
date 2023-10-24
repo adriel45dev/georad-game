@@ -2,7 +2,7 @@ export type Room = {
   id?: number;
   time?: number;
   started?: boolean;
-  initTime?: number;
+  initTime?: string;
 };
 
 // model Room {

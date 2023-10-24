@@ -39,7 +39,7 @@ model Guest {
 model Room {
   id Int @id @default(autoincrement())
   started Boolean @default(false)
-  initTime BigInt? //
+  initTime String? //
   time Int? // milisegundo
   user User[] 
   guest Guest[]
