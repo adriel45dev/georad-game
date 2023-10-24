@@ -38,7 +38,7 @@ export default async function handler(
       useTLS: true,
     });
 
-    pusher.trigger("score", "score-event", {
+    await pusher.trigger("score", "score-event", {
       message: `${JSON.stringify({ guests, guest, dbRoomID })}\n\n`,
     });
 

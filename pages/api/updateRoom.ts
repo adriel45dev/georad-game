@@ -22,12 +22,6 @@ export default async function handler(
       },
     });
 
-    // const guests = await prisma.guest.findMany({
-    //   where: {
-    //     roomId: dataRoom.id,
-    //   },
-    // });
-
     // Pusher
     const pusher = new Pusher({
       appId: process.env.PUSHER_APP_ID,
@@ -37,7 +31,7 @@ export default async function handler(
       useTLS: true,
     });
 
-    pusher.trigger("room-start", "room-start-event", {
+    await pusher.trigger("room-start", "room-start-event", {
       message: `${JSON.stringify({ room })}\n\n`,
     });
 

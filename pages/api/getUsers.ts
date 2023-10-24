@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   "use server";
   const { id } = req.query;
-  // const Pusher = require("pusher");
+  const Pusher = require("pusher");
 
   if (req.method === "GET") {
     try {
@@ -33,30 +33,18 @@ export default async function handler(
           return res.status(404).json({ error: "User not found" });
         }
 
-        // Pusher
-        // const pusher = new Pusher({
-        //   appId: process.env.PUSHER_APP_ID,
-        //   key: process.env.NEXT_PUBLIC_PUSHER_KEY,
-        //   secret: process.env.PUSHER_SECRET,
-        //   cluster: "sa1",
-        //   useTLS: true,
-        // });
+        Pusher;
+        const pusher = new Pusher({
+          appId: process.env.PUSHER_APP_ID,
+          key: process.env.NEXT_PUBLIC_PUSHER_KEY,
+          secret: process.env.PUSHER_SECRET,
+          cluster: "sa1",
+          useTLS: true,
+        });
 
-        // const pusher = new Pusher({
-        //   appId: 1692054,
-        //   key: "e9fb7aac1c7042b7aa8d",
-        //   secret: "385b4fddc2fddb1d407b",
-        //   cluster: "sa1",
-        //   useTLS: true,
-        // });
-
-        // PUSHER_APP_ID=1692054
-        // PUSHER_SECRET=385b4fddc2fddb1d407b
-        // NEXT_PUBLIC_PUSHER_KEY=e9fb7aac1c7042b7aa8d
-
-        // pusher.trigger("room", "room-event", {
-        //   message: `${JSON.stringify({ guests, room, idNum })}\n\n`,
-        // });
+        await pusher.trigger("room", "room-event", {
+          message: `${JSON.stringify({ guests, room, idNum })}\n\n`,
+        });
 
         return res.status(200).json({ guests, room });
       } else {
