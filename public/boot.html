@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link rel="stylesheet" href="boot.css">
+    <head>
+      <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+      <!-- or -->
+      <link rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    </head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <title>GEORAD</title>
+
+  </head>
+  <body style="background-color: #001f36;">
+    <nav id="nav" class="navbar  navbar-expand-lg ">
+        <a class="navbar-brand" href="#"><img class="img" src="IMG/Logo_10.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="boot.html">Home <span class="sr-only">(página atual)</span></a>
+            </li>
+            <li class="nav-item">
+              <a id="calc" class="nav-link" href="#">Calculadora</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Games
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="">Sala de Treinamentos</a>
+                <a class="dropdown-item" href="/">Batalhas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="Paint.html">ArtCreArt</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+          </form>
+        </div>
+      </nav>
+
+
+      <div id="overlayer" class="hidden">
+        <div id="abas" class="decorated">
+          <h1 style="text-align: center;">Calculadora Científica</h1>
+          <div class="conta">
+            <div class="display">
+              <input id="screen" type="text" placeholder="0">
+            </div>
+            <div class="btns">
+              <div class="row">
+                  <button id="ce" class="btn">CE</button>
+                  <button onclick="fact()">X!</button>
+                  <button class="btn">(</button>
+                  <button class="btn">)</button>
+                  <button class="btn">%</button>
+                  <button id="eval" onclick="screen.value = ''">AC</button>
+              </div>
+      
+              <div class="row">
+                  <button onclick="sin()">sin</button>
+                  <button onclick="pi()">π</button>
+                  <button class="btn">7</button>
+                  <button class="btn">8</button>
+                  <button class="btn">9</button>
+                  <button class="btn">/</button>
+              </div>
+      
+              <div class="row">
+                  <button onclick="cos()">cos</button>
+                  <button onclick="log()">log</button>
+                  <button class="btn">4</button>
+                  <button class="btn">5</button>
+                  <button class="btn">6</button>
+                  <button class="btn">*</button>
+              </div>
+      
+              <div class="row">
+                  <button onclick="tan()">tan</button>
+                  <button onclick="sqrt()">√</button>
+                  <button class="btn">1</button>
+                  <button class="btn">2</button>
+                  <button class="btn">3</button>
+                  <button class="btn">-</button>
+              </div>
+      
+              <div class="row">
+                  <button  onclick="e()">e</button>
+                  <button onclick="pow()">x <span style="position: relative; bottom: .4em; right: .1em;">y</span></button>
+                  <button class="btn">0</button>
+                  <button class="btn">.</button>
+                  <button onclick="screen.value=eval(screen.value)" >=</button>
+                  <button class="btn">+</button>
+              </div>
+      
+            </div>
+          </div>
+            
+            <button class="bot" type="submit" id="fecharBTN">Fechar</button>
+        </div>
+    </div>
+
+
+
+      
+
+      <h1 class="titulo">Coleção de formas Geométricas</h1>
+
+      <div class="p-4 flex flex-row justify-center items-center gap-2">
+        <span class="font-normal text-gray-500">Preencher</span>
+        <input type="checkbox" class="fill" />
+      </div>
+    
+    </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+      <div class="content">
+      
+        <div class="cards">
+            <div class="card-content">
+             <div class="image">
+                <img src="IMG/cubo.jpeg" alt="">
+             </div>
+
+             <div class="media-icons">
+             <a href="cubo.html"> <i class='bx bxs-star'></i></a>
+           </div>
+            
+           
+           <div class="name-profession">
+              <span class="name">Cubo</span>
+              <span class="profession">Sólido Plano</span>
+           </div>
+  
+
+            <div  class="forms">
+              <button name="cubo" class="forma">Detalhes</button>
+              
+           </div>
+  
+          </div>
+  </div>
+
+</div>
+          </div>
+      
+            <div class="col-md-4">
+<div class="content">
+      
+  <div class="cards">
+      <div class="card-content">
+       <div class="image">
+          <img src="IMG/esfera.jpeg" alt="">
+       </div>
+      
+       <div class="media-icons">
+        <i class='bx bxs-star'></i>
+      
+     </div>
+     
+     <div class="name-profession">
+        <span class="name">Esfera</span>
+        <span class="profession">Sólido Plano</span>
+     </div>
+
+
+      <div  class="forms">
+        <button name="esfera" class="forma">Detalhes</button>
+        
+     </div>
+
+    </div>
+</div>
+
+</div>
+            </div>
+          
+              <div class="col-md-4">
+<div class="content">
+      
+  <div class="cards">
+      <div class="card-content">
+       <div class="image">
+          <img src="IMG/cone.jpeg" alt="">
+       </div>
+      
+       <div class="media-icons">
+        <i class='bx bxs-star'></i>
+       
+     </div>
+     
+     <div class="name-profession">
+        <span class="name">Cone</span>
+        <span class="profession">Sólido Plano</span>
+     </div>
+
+
+      <div  class="forms">
+        <button name="cone" class="forma">Detalhes</button>
+        
+     </div>
+
+    </div>
+</div>
+
+</div>
+      </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+<div class="content">
+      
+  <div class="cards">
+      <div class="card-content">
+       <div class="image">
+          <img src="IMG/cilindro.png" alt="">
+       </div>
+
+       <div class="media-icons">
+        <i class='bx bxs-star'></i>
+     
+     </div>
+      
+     
+     <div class="name-profession">
+        <span class="name">Cilindro</span>
+        <span class="profession">Sólido Plano</span>
+     </div>
+
+
+      <div  class="forms">
+        <button name="cilindro" class="forma">Detalhes</button>
+        
+     </div>
+
+    </div>
+</div>
+
+</div>
+          </div>
+         
+            <div class="col-md-4">
+<div class="content">
+      
+  <div class="cards">
+      <div class="card-content">
+       <div class="image">
+          <img src="IMG/tetraedro.jpeg" alt="">
+       </div>
+      
+     
+       <div class="media-icons">
+        <i class='bx bxs-star'></i>
+        
+     </div>
+
+     <div class="name-profession">
+        <span class="name">Tetraedro</span>
+        <span class="profession">Sólido Plano</span>
+     </div>
+
+
+      <div  class="forms">
+        <button name="tetraedro" class="forma">Detalhes</button>
+        
+     </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+
+  <div class="col-md-4">
+<div class="content">
+      
+  <div class="cards">
+      <div class="card-content">
+       <div class="image">
+          <img src="IMG/icosaedro.jpeg" alt="">
+       </div>
+      
+       <div class="media-icons">
+        <i class='bx bxs-star'></i>
+       
+     </div>
+     
+     <div class="name-profession">
+        <span class="name">Icosaedro</span>
+        <span class="profession">Sólido Plano</span>
+     </div>
+
+
+      <div  class="forms">
+        <button name="icosaedro" class="forma">Detalhes</button>
+        
+     </div>
+
+    </div>
+</div>
+</div>
+</div>
+        </div>
+      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+  <div class="content">
+        
+    <div class="cards">
+        <div class="card-content">
+         <div class="image">
+            <img src="IMG/dodecaedro.jpeg" alt="">
+         </div>
+        
+         <div class="media-icons">
+          <i class='bx bxs-star'></i>
+        
+       </div>
+       
+       <div class="name-profession">
+          <span class="name">Dodecaedro</span>
+          <span class="profession">Sólido Plano</span>
+       </div>
+  
+  
+        <div  class="forms">
+          <button name="dodecaedro" class="forma">Detalhes</button>
+          
+       </div>
+  
+      </div>
+  </div>
+  </div>
+  </div>
+
+    <div class="col-md-4">
+  <div class="content">
+        
+    <div class="cards">
+        <div class="card-content">
+         <div class="image">
+            <img src="IMG/capsula.jpeg" alt="">
+         </div>
+        
+         <div class="media-icons">
+          <i class='bx bxs-star'></i>
+        
+       </div>
+
+
+       
+       <div class="name-profession">
+          <span class="name">Capsula</span>
+          <span class="profession">Sólido Plano</span>
+       </div>
+  
+  
+        <div  class="forms">
+          <button name="dodecaedro" class="forma">Detalhes</button>
+          
+       </div>
+  
+      </div>
+  </div>
+  
+  
+  </div>
+  </div>
+
+
+    <div class="col-md-4">
+  <div class="content">
+        
+    <div class="cards">
+        <div class="card-content">
+         <div class="image">
+            <img src="IMG/piramide.jpeg" alt="">
+         </div>
+        
+         <div class="media-icons">
+          <i class='bx bxs-star'></i>
+          
+       </div>
+       
+       <div class="name-profession">
+          <span class="name">Pirâmide</span>
+          <span class="profession">Sólido Plano</span>
+       </div>
+  
+  
+        <div  class="forms">
+          <button name="dodecaedro" class="forma">Detalhes</button>
+          
+       </div>
+  
+      </div>
+  </div>
+  </div> 
+  
+  
+  </div>
+  <div id="overlay" class="hidden">
+    <div id="aba" class="decorated">
+        <div id="canvas-container" class="max-w-full overflow-hidden"></div>
+        
+        <button class="bot" type="submit" id="fecharBtn"><i class='bx bxs-x-circle'></i></button>
+    </div>
+</div>
+  </div>
+</div>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/cone meia fenda.jpeg" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+          
+         </div>
+         
+         <div class="name-profession">
+            <span class="name">Cone Meia Fenda</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="coneMeiaFenda" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    </div>
+    
+    
+    
+    </div>
+   
+      <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/cone de tronco.png" alt="">
+           </div>
+          
+
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+       
+         </div>
+         
+         <div class="name-profession">
+            <span class="name">Cone de Tronco</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="coneDeTronco" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    
+    </div>
+    
+    </div>
+  
+      <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/cone de duas base.jpeg" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+            
+         </div>
+
+         <div class="name-profession">
+            <span class="name">Cone de dupla base</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="coneDeDuplaBase" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    </div>
+    </div>
+  </div> 
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/piramide triangular.png" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+            
+         </div>
+
+         <div class="name-profession">
+            <span class="name">Pirâmide Triangular</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="piramideTriangular" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    
+    </div>
+      </div>
+     
+        <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/piramide penta.png" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+           
+         </div>
+         
+         <div class="name-profession">
+            <span class="name">Pirâmide Pentagonal</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="piramidePentagonal" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    </div>
+    </div>
+   
+      <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/piramide hexa.jpeg" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+            
+         </div>
+         
+         <div class="name-profession">
+            <span class="name">Pirâmide Hexagonal</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="piramideHexagonal" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/prisma base quad.png" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+
+         </div>
+
+         <div class="name-profession">
+            <span class="name">Prisma quadrado</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="prismaQuadrado" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    
+    </div>
+      </div>
+      
+        <div class="col-md-4">
+    <div class="content">
+        
+      <div class="cards">
+          <div class="card-content">
+           <div class="image">
+              <img src="IMG/prisma triangular.png" alt="">
+           </div>
+          
+           <div class="media-icons">
+            <i class='bx bxs-star'></i>
+      
+         </div>
+
+         <div class="name-profession">
+            <span class="name">Prisma Triangular</span>
+            <span class="profession">Sólido Plano</span>
+         </div>
+    
+    
+          <div  class="forms">
+            <button name="prismaTriangular" class="forma">Detalhes</button>
+            
+         </div>
+    
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="content">
+            
+        <div class="cards">
+            <div class="card-content">
+             <div class="image">
+                <img src="IMG/paralelepípedo.png" alt="">
+             </div>
+            
+             <div class="media-icons">
+              <i class='bx bxs-star'></i>
+     
+           </div>
+           
+           <div class="name-profession">
+              <span class="name">Paralelepípedo</span>
+              <span class="profession">Sólido Plano</span>
+           </div>
+      
+      
+            <div  class="forms">
+              <button name="paralelepipedo" class="forma">Detalhes</button>
+              
+           </div>
+      
+          </div>
+      </div>
+      
+      </div>
+                  </div>
+
+  </div>
+    
+  </div>
+
+
+  
+    <script src="https://unpkg.com/three@0.157.0/build/three.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="formas.js"></script>
+    <script src="script.js"></script>
+    <script src="sobreP.js"></script>
+  </body>
+</html>

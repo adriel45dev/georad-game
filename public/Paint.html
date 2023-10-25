@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+ body {
+        background-image: url("IMG/Design sem nome.png"); /* Substitua pelo caminho da sua imagem de fundo */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: white;
+    }
+    canvas {
+      margin: 45px;
+      border: 1px solid black;
+      display: block;
+      border-radius: 15px;
+      background-color: white;
+
+    }
+    .paint-container {
+      max-width: 400px;
+    }
+  </style>
+  <link rel="stylesheet" href="boot.css">
+</head>
+<body>
+
+    <nav id="nav" class="navbar  navbar-expand-lg ">
+        <a class="navbar-brand" href="#"><img class="img" src="IMG/Logo_Ionara sem fundo.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="boot.css">Home <span class="sr-only">(página atual)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Calc.html">Calculadora</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Games
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="SalaT.html">Sala de Treinamentos</a>
+                <a class="dropdown-item" href="">Batalhas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="Paint.html">ArtCreArt</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+          </form>
+        </div>
+      </nav>
+
+
+
+
+
+
+
+      <div  style="margin-top: 30px;">
+        <h1 style="text-align: center;">Sorteador de Desafios</h1>
+        <p style="text-align: center;">Clique no botão para sortear um desafio:</p>
+        <p style="text-align: center;" id="challenge"></p>
+        <div style="display: flex; justify-content: center;">
+        <button style="align-items: center;" onclick="sortearDesafio()">Sortear Desafio</button>
+      </div>
+    </div>
+      
+      <div class="cont">
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-md-6"> 
+              <canvas id="canvas" width="500" height="350"></canvas>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6"> 
+              <div id="ferramentas" class="form-group">
+                <div class="form-group">
+                  <label for="brushSizeRange">Espessura do Pincel:</label>
+                  <input type="range" class="form-control-range" id="brushSizeRange" min="1" max="10" step="1">
+                </div>
+                <div class="form-group">
+                  <label for="colorPicker">Cor do Pincel:</label>
+                  <input type="color" class="form-control" id="colorPicker">
+                </div>
+                <button style="width: 250px;" id="clear" class="btn btn-primary">Limpar Tela</button>
+                <button style="width: 250px; margin-top: 5px;" id="toggleEraser" class="btn btn-secondary">Ativar Borracha</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
+  <script>
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+    const brushSizeRange = document.getElementById("brushSizeRange");
+    const colorPicker = document.getElementById("colorPicker");
+    const clearButton = document.getElementById("clear");
+    const toggleEraserButton = document.getElementById("toggleEraser");
+    let drawing = false;
+    let eraserMode = false;
+
+    canvas.addEventListener("mousedown", () => {
+      drawing = true;
+    });
+
+    canvas.addEventListener("mouseup", () => {
+      drawing = false;
+      context.beginPath();
+    });
+
+    canvas.addEventListener("mousemove", draw);
+
+    brushSizeRange.addEventListener("input", () => {
+      context.lineWidth = brushSizeRange.value;
+    });
+
+    colorPicker.addEventListener("input", () => {
+      if (!eraserMode) {
+        context.strokeStyle = colorPicker.value;
+      }
+    });
+
+    clearButton.addEventListener("click", clearCanvas);
+    toggleEraserButton.addEventListener("click", toggleEraser);
+
+    function draw(e) {
+      if (!drawing) return;
+
+      const x = e.clientX - canvas.getBoundingClientRect().left;
+      const y = e.clientY - canvas.getBoundingClientRect().top;
+
+      context.lineCap = "round";
+
+      context.lineTo(x, y);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(x, y);
+    }
+
+    function clearCanvas() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function toggleEraser() {
+      eraserMode = !eraserMode;
+      toggleEraserButton.textContent = eraserMode ? "Desativar Borracha" : "Ativar Borracha";
+      context.strokeStyle = eraserMode ? "white" : colorPicker.value;
+    }
+
+    const desafios = [
+      "Desafio 1  Triângulo Equilátero: Desenhe um triângulo equilátero com todos os lados iguais.",
+      "Desafio 2  Círculo: Desenhe um círculo perfeito. Tente torná-lo o mais simétrico possível.",
+      "Desafio 3  Quadrado Dentro do Círculo: Desenhe um círculo e, dentro dele, desenhe um quadrado que toque os pontos médios dos lados do círculo.",
+      "Desafio 4  Estrela de Cinco Pontas: Crie uma estrela de cinco pontas. Tente deixar os ângulos internos uniformes.",
+      "Desafio 5  Cubo 3D: Desenhe um cubo em perspectiva tridimensional. Experimente sombrear para criar um efeito de profundidade.",
+      "Desafio 6  Paisagem Geométrica: Desenhe uma paisagem com elementos geométricos, como montanhas, árvores ou edifícios, usando formas geométricas básicas",
+    ];
+
+    function sortearDesafio() {
+      const challengeElement = document.getElementById("challenge");
+      const randomIndex = Math.floor(Math.random() * desafios.length);
+      const randomChallenge = desafios[randomIndex];
+      challengeElement.textContent = randomChallenge;
+    }
+  </script>
+  <script src="sobreP.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
