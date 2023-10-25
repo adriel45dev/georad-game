@@ -41,7 +41,7 @@ export default function Header() {
         <button className="hover:text-blue-400 border-r pr-2 rounded-r-lg">
           Calculadora
         </button>
-        <Link href={"game"} className="hover:text-blue-400">
+        <Link href={"/game"} className="hover:text-blue-400">
           Jogo
         </Link>
       </div>
