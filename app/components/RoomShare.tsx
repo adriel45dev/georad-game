@@ -1,7 +1,9 @@
+"use client";
 import CloseIcon from "@/public/assets/icons/CloseIcon";
-
 import Link from "next/link";
 import ShareButton from "./ShareButton";
+import { useEffect, useState } from "react";
+import CopyIcon from "@/public/assets/icons/CopyIcon";
 
 type RoomStartProps = {
   shareRoomState: boolean;
@@ -14,6 +16,32 @@ export default function RoomShare({
   setShareRoomState,
   sala,
 }: RoomStartProps) {
+  const [copyState, setCopyState] = useState(false);
+
+  useEffect(() => {
+    setCopyState(false);
+  }, [sala]);
+
+  const copyText = async () => {
+    if (!sala) return;
+    try {
+      const text = String(sala + 3000);
+      const permissionName: PermissionName =
+        "clipboard-write" as PermissionName;
+
+      if (navigator.permissions) {
+        const permission = await navigator.permissions.query({
+          name: permissionName,
+        });
+        if (permission.state == "granted" || permission.state == "prompt") {
+          await navigator.clipboard.writeText(text);
+          setCopyState(true);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div
       className={`${
@@ -41,11 +69,24 @@ export default function RoomShare({
               <div className="w-full flex gap-2 flex-col">
                 <p className="text-xs font-normal text-gray-400">Código</p>
 
-                <input
-                  className="w-full border-b-2 border-gray-600 transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0 text-4xl"
-                  value={sala + 3000}
-                  readOnly
-                />
+                <div className="relative">
+                  <input
+                    className={`${
+                      copyState
+                        ? "border-green-600 text-green-600"
+                        : "border-gray-600"
+                    } text-center w-full rounded-lg border-b-2  transition duration-500 ease-in-out focus:border-violet-600 bg-transparent text-white focus:outline-none focus:ring-0 text-4xl`}
+                    value={sala + 3000}
+                    readOnly
+                  />
+
+                  <button
+                    className="absolute inset-0 flex items-center justify-end text-gray-400 hover:text-green-500 mr-2"
+                    onClick={copyText}
+                  >
+                    <CopyIcon className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
               <div className="w-full gap-2 flex flex-col">

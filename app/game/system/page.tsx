@@ -11,6 +11,7 @@ import RoomShare from "@/app/components/RoomShare";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
 import Avatars from "@/app/components/Avatars";
+import LogoutIcon from "@/public/assets/icons/LogoutIcon";
 
 export default function System() {
   const [state, setState] = useState(false);
@@ -115,10 +116,11 @@ export default function System() {
             />
             {hasUser && (
               <button
-                className="text-bold text-violet-500"
+                className="text-bold text-violet-500 flex gap-2 hover:text-red-400"
                 onClick={removeUser}
               >
-                {">"} Sair
+                <LogoutIcon className="w-6 h-6" />
+                <span>Sair</span>
               </button>
             )}
           </div>
