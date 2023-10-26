@@ -44,7 +44,7 @@ export default function System() {
   const removeUser = () => {
     localStorage.removeItem("user");
     // remover do banco de dados
-    router.push(`/game`);
+    router.push(`/`);
   };
 
   const usernameGerator = () => {

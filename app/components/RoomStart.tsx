@@ -55,7 +55,7 @@ export default function RoomStart({
     if (response.ok) {
       const { guest, room } = data;
       saveUser(guest);
-      router.push(`/game/room/${room.id + 3000}`);
+      router.push(`/room/${room.id + 3000}`);
     } else {
       setAlertState(true);
       setAlertMessage("A sala informada não existe.");
@@ -82,7 +82,7 @@ export default function RoomStart({
       const { updateGuest } = data;
 
       saveUser(updateGuest);
-      router.push(`/game/room/${room}`);
+      router.push(`/room/${room}`);
     } else {
       setAlertState(true);
       setAlertMessage("A sala informada não existe.");

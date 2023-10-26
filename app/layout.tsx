@@ -1,14 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Nunito } from "next/font/google";
-import Header from "./components/Header";
+import { Nunito } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "GeoRAD App",
   description: "Calculando as formas.",
+  icons: {
+    icon: "/assets/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <Header />
+        {/* <Header /> */}
         {children}
       </body>
     </html>

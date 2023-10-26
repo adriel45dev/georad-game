@@ -23,7 +23,7 @@ export default function Game() {
 
           <section className="flex flex-col min-w-max py-8 justify-center items-center">
             <div className="flex flex-row gap-2 w-max">
-              <ButtonSection href="/game/system">
+              <ButtonSection href="/system">
                 <GameIcon className="text-violet-900 w-8 h-8" />
                 <span className="group-hover:text-violet-600">
                   COMEÇAR A JOGAR

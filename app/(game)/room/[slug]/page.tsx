@@ -64,7 +64,7 @@ export default function Room({ params: { slug } }: PageProps) {
       alert(
         "Desculpa esse parece ser um erro no nosso servidor. Tente novamente ou volte mais tarde -- / TENTAR NOVAMENTE / CANCELAR "
       );
-      router.push("/game/system");
+      router.push("/system");
     }
 
     setFetched(true);
@@ -78,7 +78,7 @@ export default function Room({ params: { slug } }: PageProps) {
       setActiveUser((prevActiveUser) => ({ ...data }));
       getUsers();
     } else {
-      router.push("/game/system");
+      router.push("/system");
     }
   };
 
@@ -150,7 +150,7 @@ export default function Room({ params: { slug } }: PageProps) {
 
   useEffect(() => {
     const interval = setTimeout(() => {
-      if (+slug < 3000) return router.push("/game");
+      if (+slug < 3000) return router.push("/");
       isUserActive();
     }, 1000);
 
@@ -293,7 +293,7 @@ export default function Room({ params: { slug } }: PageProps) {
     <main className="flex min-h-screen flex-col items-center justify-center p-8 md:px-24 py-4 bg-slate-900 min-w-full gap-4">
       <header className="flex flex-row w-full  justify-between items-center px-4">
         <Link
-          href="/game"
+          href="/"
           className="text-4xl font-extrabold leading-none tracking-tight  md:text-2xl lg:text-4xl text-white"
         >
           GeoRAD <span className=" text-violet-500">Play</span>

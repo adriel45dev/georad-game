@@ -95,21 +95,21 @@ export default function RoomShare({
                 </p>
                 <Link
                   className="text-violet-400 text-2xl flex-wrap break-words"
-                  href={`/game/room/${sala + 3000}`}
+                  href={`/room/${sala + 3000}`}
                 >
-                  {`https://georad.vercel.app/game/${sala + 3000}`}
+                  {`https://georad-game.vercel.app/room/${sala + 3000}`}
                 </Link>
               </div>
 
               <div className="w-full flex flex-col md:flex-row  justify-start items-center gap-2 grid-cols-1 md:grid-cols-5">
                 <div className="flex col-span-1 md:col-span-3 w-full  justify-center items-center gap-6 flex-wrap">
                   <ShareButton
-                    url={`https://georad.vercel.app/game/room/${sala + 3000}`}
+                    url={`https://georad-game.vercel.app/room/${sala + 3000}`}
                   />
                 </div>
 
                 <Link
-                  href={`/game/room/${sala + 3000}`}
+                  href={`/room/${sala + 3000}`}
                   className="w-full flex items-center justify-center p-4 text-sm font-medium  rounded-lg group bg-violet-600 hover:text-white text-white focus:ring-4 focus:outline-none  focus:ring-violet-800"
                 >
                   Entrar
